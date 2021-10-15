@@ -85,11 +85,11 @@ func (mp mappingProxy) DeleteRelationships(ctx context.Context, preconditions []
 }
 
 func (mp mappingProxy) Revision(ctx context.Context) (datastore.Revision, error) {
-	return mp.delegate.Revision(ctx)
+	return mp.delegate.QuantizedRevision(ctx)
 }
 
 func (mp mappingProxy) SyncRevision(ctx context.Context) (datastore.Revision, error) {
-	return mp.delegate.SyncRevision(ctx)
+	return mp.delegate.HeadRevision(ctx)
 }
 
 func (mp mappingProxy) Watch(ctx context.Context, afterRevision datastore.Revision) (<-chan *datastore.RevisionChanges, <-chan error) {

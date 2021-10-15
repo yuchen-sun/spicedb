@@ -156,7 +156,7 @@ func (as *aclServer) Read(ctx context.Context, req *v0.ReadRequest) (*v0.ReadRes
 	} else {
 		// No revision provided, we'll pick one
 		var err error
-		atRevision, err = as.ds.Revision(ctx)
+		atRevision, err = as.ds.QuantizedRevision(ctx)
 		if err != nil {
 			return nil, status.Errorf(codes.Internal, "unable to pick request revision: %s", err)
 		}
@@ -226,7 +226,7 @@ func (as *aclServer) Check(ctx context.Context, req *v0.CheckRequest) (*v0.Check
 }
 
 func (as *aclServer) ContentChangeCheck(ctx context.Context, req *v0.ContentChangeCheckRequest) (*v0.CheckResponse, error) {
-	atRevision, err := as.ds.SyncRevision(ctx)
+	atRevision, err := as.ds.HeadRevision(ctx)
 	if err != nil {
 		return nil, rewriteACLError(err)
 	}
@@ -363,7 +363,7 @@ func (as *aclServer) Lookup(ctx context.Context, req *v0.LookupRequest) (*v0.Loo
 
 func (as *aclServer) pickBestRevision(ctx context.Context, requested *v0.Zookie) (decimal.Decimal, error) {
 	// Calculate a revision as we see fit
-	databaseRev, err := as.ds.Revision(ctx)
+	databaseRev, err := as.ds.QuantizedRevision(ctx)
 	if err != nil {
 		return decimal.Zero, err
 	}

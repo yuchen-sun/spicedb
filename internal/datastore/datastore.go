@@ -31,12 +31,12 @@ type Datastore interface {
 	// filter if all preconditions are met.
 	DeleteRelationships(ctx context.Context, preconditions []*v1.Precondition, filter *v1.RelationshipFilter) (Revision, error)
 
-	// Revision gets the currently replicated revision for this datastore.
-	Revision(ctx context.Context) (Revision, error)
+	// QuantizedRevision gets the currently replicated revision for this datastore.
+	QuantizedRevision(ctx context.Context) (Revision, error)
 
-	// SyncRevision gets a revision that is guaranteed to be at least as fresh as
+	// HeadRevision gets a revision that is guaranteed to be at least as fresh as
 	// right now.
-	SyncRevision(ctx context.Context) (Revision, error)
+	HeadRevision(ctx context.Context) (Revision, error)
 
 	// Watch notifies the caller about all changes to tuples.
 	//

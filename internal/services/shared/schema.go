@@ -14,7 +14,7 @@ import (
 
 // EnsureNoRelationshipsExist ensures that no relationships exist within the namespace with the given name.
 func EnsureNoRelationshipsExist(ctx context.Context, ds datastore.Datastore, namespaceName string) error {
-	syncRevision, err := ds.SyncRevision(ctx)
+	syncRevision, err := ds.HeadRevision(ctx)
 	if err != nil {
 		return err
 	}
@@ -57,7 +57,7 @@ func SanityCheckExistingRelationships(ctx context.Context, ds datastore.Datastor
 		return err
 	}
 
-	syncRevision, err := ds.SyncRevision(ctx)
+	syncRevision, err := ds.HeadRevision(ctx)
 	if err != nil {
 		return err
 	}

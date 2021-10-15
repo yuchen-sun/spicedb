@@ -38,11 +38,11 @@ func (rd roDatastore) WriteTuples(ctx context.Context, _ []*v1.Precondition, _ [
 }
 
 func (rd roDatastore) Revision(ctx context.Context) (datastore.Revision, error) {
-	return rd.delegate.Revision(ctx)
+	return rd.delegate.QuantizedRevision(ctx)
 }
 
 func (rd roDatastore) SyncRevision(ctx context.Context) (datastore.Revision, error) {
-	return rd.delegate.SyncRevision(ctx)
+	return rd.delegate.HeadRevision(ctx)
 }
 
 func (rd roDatastore) Watch(ctx context.Context, afterRevision datastore.Revision) (<-chan *datastore.RevisionChanges, <-chan error) {

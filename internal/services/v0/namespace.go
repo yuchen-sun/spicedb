@@ -71,7 +71,7 @@ func (nss *nsServer) WriteConfig(ctx context.Context, req *v0.WriteConfigRequest
 			return nil, rewriteNamespaceError(err)
 		}
 
-		syncRevision, err := nss.ds.SyncRevision(ctx)
+		syncRevision, err := nss.ds.HeadRevision(ctx)
 		if err != nil {
 			return nil, rewriteNamespaceError(err)
 		}
@@ -141,7 +141,7 @@ func (nss *nsServer) ReadConfig(ctx context.Context, req *v0.ReadConfigRequest) 
 }
 
 func (nss *nsServer) DeleteConfigs(ctx context.Context, req *v0.DeleteConfigsRequest) (*v0.DeleteConfigsResponse, error) {
-	syncRevision, err := nss.ds.SyncRevision(ctx)
+	syncRevision, err := nss.ds.HeadRevision(ctx)
 	if err != nil {
 		return nil, rewriteNamespaceError(err)
 	}

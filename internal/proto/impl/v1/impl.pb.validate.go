@@ -362,7 +362,7 @@ func (m *DecodedZookie_V1Zookie) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Revision
+	// no validation rules for QuantizedRevision
 
 	return nil
 }
@@ -431,7 +431,7 @@ func (m *DecodedZookie_V2Zookie) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Revision
+	// no validation rules for QuantizedRevision
 
 	return nil
 }
@@ -500,7 +500,7 @@ func (m *DecodedZedToken_V1Zookie) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Revision
+	// no validation rules for QuantizedRevision
 
 	return nil
 }
@@ -569,7 +569,7 @@ func (m *DecodedZedToken_V1ZedToken) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Revision
+	// no validation rules for QuantizedRevision
 
 	return nil
 }
