@@ -101,7 +101,7 @@ func NamespaceDeleteTest(t *testing.T, tester DatastoreTester) {
 	require.True(ver.GreaterThan(datastore.NoRevision))
 	require.NoError(err)
 
-	deletedRevision, err := ds.SyncRevision(ctx)
+	deletedRevision, err := ds.HeadRevision(ctx)
 	require.NoError(err)
 
 	iter, err := ds.QueryTuples(datastore.TupleQueryResourceFilter{

@@ -63,11 +63,11 @@ func (vd validatingDatastore) WriteTuples(ctx context.Context, preconditions []*
 }
 
 func (vd validatingDatastore) Revision(ctx context.Context) (datastore.Revision, error) {
-	return vd.delegate.Revision(ctx)
+	return vd.delegate.QuantizedRevision(ctx)
 }
 
 func (vd validatingDatastore) SyncRevision(ctx context.Context) (datastore.Revision, error) {
-	return vd.delegate.SyncRevision(ctx)
+	return vd.delegate.HeadRevision(ctx)
 }
 
 func (vd validatingDatastore) Watch(ctx context.Context, afterRevision datastore.Revision) (<-chan *datastore.RevisionChanges, <-chan error) {

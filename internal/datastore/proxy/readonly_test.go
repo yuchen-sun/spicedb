@@ -71,9 +71,9 @@ func TestRevisionPassthrough(t *testing.T) {
 	ds := NewReadonlyDatastore(delegate)
 	ctx := context.Background()
 
-	delegate.On("Revision").Return(expectedRevision, nil).Times(1)
+	delegate.On("QuantizedRevision").Return(expectedRevision, nil).Times(1)
 
-	revision, err := ds.Revision(ctx)
+	revision, err := ds.QuantizedRevision(ctx)
 	require.NoError(err)
 	require.Equal(expectedRevision, revision)
 	delegate.AssertExpectations(t)
@@ -86,9 +86,9 @@ func TestSyncRevisionPassthrough(t *testing.T) {
 	ds := NewReadonlyDatastore(delegate)
 	ctx := context.Background()
 
-	delegate.On("SyncRevision").Return(expectedRevision, nil).Times(1)
+	delegate.On("HeadRevision").Return(expectedRevision, nil).Times(1)
 
-	revision, err := ds.SyncRevision(ctx)
+	revision, err := ds.HeadRevision(ctx)
 	require.NoError(err)
 	require.Equal(expectedRevision, revision)
 	delegate.AssertExpectations(t)

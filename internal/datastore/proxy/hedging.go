@@ -173,7 +173,7 @@ func newHedgingProxyWithTimeSource(
 
 func (hp hedgingProxy) Revision(ctx context.Context) (rev datastore.Revision, err error) {
 	subreq := func(ctx context.Context, responseReady chan<- struct{}) {
-		rev, err = hp.delegate.Revision(ctx)
+		rev, err = hp.delegate.QuantizedRevision(ctx)
 		responseReady <- struct{}{}
 	}
 
@@ -184,7 +184,7 @@ func (hp hedgingProxy) Revision(ctx context.Context) (rev datastore.Revision, er
 
 func (hp hedgingProxy) SyncRevision(ctx context.Context) (rev datastore.Revision, err error) {
 	subreq := func(ctx context.Context, responseReady chan<- struct{}) {
-		rev, err = hp.delegate.SyncRevision(ctx)
+		rev, err = hp.delegate.HeadRevision(ctx)
 		responseReady <- struct{}{}
 	}
 

@@ -56,7 +56,7 @@ func (ws *watchServer) Watch(req *v0.WatchRequest, stream v0.WatchService_WatchS
 		afterRevision = decodedRevision
 	} else {
 		var err error
-		afterRevision, err = ws.ds.Revision(stream.Context())
+		afterRevision, err = ws.ds.QuantizedRevision(stream.Context())
 		if err != nil {
 			return status.Errorf(codes.Unavailable, "failed to start watch: %s", err)
 		}
